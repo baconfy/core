@@ -1,0 +1,8 @@
+{
+  "name": "baconfy/fixture-broken",
+  "extra": {
+    "baconfy": {
+      "module": "tasks"
+    }
+  }
+}

@@ -21,7 +21,8 @@
     "autoload-dev": {
         "psr-4": {
             "Baconfy\\Core\\Tests\\": "tests/",
-            "Baconfy\\Core\\Tests\\Fixtures\\Notes\\": "tests/Fixtures/notes/src/"
+            "Baconfy\\Core\\Tests\\Fixtures\\Notes\\": "tests/Fixtures/notes/src/",
+            "Baconfy\\Core\\Tests\\Fixtures\\Broken\\": "tests/Fixtures/broken/src/"
         }
     },
     "extra": {

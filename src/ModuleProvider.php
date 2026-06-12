@@ -2,6 +2,7 @@
 
 namespace Baconfy\Core;
 
+use Baconfy\Core\Exceptions\ManifestMismatchException;
 use Illuminate\Support\ServiceProvider;
 use ReflectionClass;
 
@@ -35,6 +36,8 @@ abstract class ModuleProvider extends ServiceProvider
         parent::__construct($app);
 
         $this->booting(function () {
+            $this->validateManifest();
+
             $this->app->make(ModuleRegistry::class)->register(
                 new Module(
                     name: $this->name(),
@@ -81,6 +84,32 @@ abstract class ModuleProvider extends ServiceProvider
     public function navigation(): ?iterable
     {
         return null;
+    }
+
+    /**
+     * Validates the manifest file against the expected module name.
+     *
+     *
+     * @throws ManifestMismatchException
+     */
+    protected function validateManifest(): void
+    {
+        $base = $this->packageBasePath();
+        if ($base === null) {
+            return;
+        }
+
+        $contents = file_get_contents($base.'/composer.json');
+        if ($contents === false) {
+            return;
+        }
+
+        $manifest = json_decode($contents, true);
+
+        $declared = $manifest['extra']['baconfy']['module'] ?? null;
+        if ($declared !== null && $declared !== $this->name()) {
+            throw new ManifestMismatchException($this->name(), $declared);
+        }
     }
 
     /**

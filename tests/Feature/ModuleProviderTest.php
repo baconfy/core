@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
+use Baconfy\Core\Exceptions\ManifestMismatchException;
 use Baconfy\Core\ModuleRegistry;
+use Baconfy\Core\Tests\Fixtures\Broken\BrokenServiceProvider;
 use Baconfy\Core\Tests\Fixtures\Notes\NotesServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +41,11 @@ it('evaluates the label lazily at serialization time', function () {
 
     expect($module->label())->toBe('Notes')
         ->and(NotesServiceProvider::$labelCalls)->toBe(1);
+});
+
+it('throws when the manifest module does not match the provider name', function () {
+    expect(fn () => $this->registerModule(BrokenServiceProvider::class))
+        ->toThrow(ManifestMismatchException::class, 'broken');
 });
 
 it('serializes the module for the frontend', function () {

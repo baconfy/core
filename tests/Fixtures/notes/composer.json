@@ -1,3 +1,8 @@
 {
-  "name": "baconfy/fixture-notes"
+  "name": "baconfy/fixture-notes",
+  "extra": {
+    "baconfy": {
+      "module": "notes"
+    }
+  }
 }
