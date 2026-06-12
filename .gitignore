@@ -1,0 +1,38 @@
+# Composer dependencies
+/vendor/
+
+# IDE files
+/.idea/
+/.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test coverage
+.phpunit.result.cache
+coverage/
+.phpunit.cache/
+
+# Build artifacts
+composer.lock
+
+# Environment files
+.env
+.env.backup
+.env.production
+
+# PHPStan
+.phpstan.cache
+phpstan.neon.dist
+
+# Laravel Pint
+.php-cs-fixer.cache
+
+# Temporary files
+*.tmp
+*.bak
+*.log
