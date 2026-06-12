@@ -17,9 +17,7 @@ jobs:
           coverage: none
 
       - run: composer install --prefer-dist --no-interaction
-
       - run: vendor/bin/pint --test
-
       - run: vendor/bin/phpstan analyse --no-progress
 
   tests:
