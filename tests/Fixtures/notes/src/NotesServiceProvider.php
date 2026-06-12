@@ -3,10 +3,13 @@
 namespace Baconfy\Core\Tests\Fixtures\Notes;
 
 use Baconfy\Core\ModuleProvider;
+use Baconfy\Core\Navigation;
 use Illuminate\Support\Facades\Route;
 
 class NotesServiceProvider extends ModuleProvider
 {
+    public static int $navigationCalls = 0;
+
     public function name(): string
     {
         return 'notes';
@@ -20,6 +23,15 @@ class NotesServiceProvider extends ModuleProvider
     public function icon(): string
     {
         return 'notebook-pen';
+    }
+
+    public function navigation(): ?iterable
+    {
+        static::$navigationCalls++;
+
+        return [
+            Navigation::make('All notes')->route('notes.index'),
+        ];
     }
 
     public function boot(): void

@@ -19,3 +19,11 @@ it('loads package routes with module prefix and name', function () {
 
     $this->get('/notes')->assertOk()->assertSee('notes index');
 });
+
+it('does not evaluate navigation during boot', function () {
+    NotesServiceProvider::$navigationCalls = 0;
+
+    $this->registerModule(NotesServiceProvider::class);
+
+    expect(NotesServiceProvider::$navigationCalls)->toBe(0);
+});
