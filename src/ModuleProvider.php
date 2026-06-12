@@ -38,10 +38,39 @@ abstract class ModuleProvider extends ServiceProvider
             $this->app->make(ModuleRegistry::class)->register(
                 new Module(
                     name: $this->name(),
+                    order: $this->order(),
+                    can: $this->can(),
+                    icon: $this->icon(),
+                    routeName: $this->routeName(),
+                    label: fn () => $this->label(),
                     navigation: fn () => $this->navigation(),
                 ),
             );
         });
+    }
+
+    /**
+     * Determines if a specific condition or capability is met.
+     */
+    public function can(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * Retrieves the order value.
+     */
+    public function order(): int
+    {
+        return 100;
+    }
+
+    /**
+     * Generates and returns the route name.
+     */
+    public function routeName(): ?string
+    {
+        return $this->name().'.index';
     }
 
     /**
